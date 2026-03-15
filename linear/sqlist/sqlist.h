@@ -1,4 +1,4 @@
-//接口：数据长什么样（结构体定义 sqlist），以及能做什么操作（函数声明 list_insert 等）
+//接口：数据长什么样（定义 sqlist），函数声明 list_insert 
 #define N 100
 
 typedef int data_t;

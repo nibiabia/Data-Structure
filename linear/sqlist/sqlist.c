@@ -10,7 +10,7 @@ sqlink list_create(){
     sqlink  L;
     //第一步：申请内存
     L = (sqlink)malloc(sizeof(sqlist));
-    if(L = NULL){
+    if(L == NULL){
         printf("Malloc failed!\n");//给用户一个提示：
         // 内存分配失败，放回一个特殊类型的指针：NULL
         return NULL;
@@ -34,6 +34,14 @@ int list_clear(sqlink L){
     return 0;
 
 };
+
+int list_delete(sqlink L){
+    if(L == NULL){
+        return -1;
+    }
+    free(L);
+    return 0;
+}
 
 int list_empty(sqlink L){
 
@@ -67,13 +75,30 @@ int list_insert(sqlink L,data_t value,int pos){
         printf("Pos is invalid\n");
         return -1;
     }
-    //3.move
+    //3.move  从后往前移
     for(int i = L->last;i >= pos;i--){
         L->data[i+1] = L->data[i];
     }
     //4.update value last
     L->data[pos] = value;
     L->last++;
+    return 0;
+
+}
+
+
+int list_show(sqlink L){   //顺序表遍历
+
+    if(L == NULL){
+        return -1;
+    }
+    if(L->last == -1){
+        printf("List is empty\n");
+    }
+    for(int i = 0;i <= L->last;i++){
+        printf("%d ",L->data[i]);
+    }
+    printf("\n");
     return 0;
 
 }

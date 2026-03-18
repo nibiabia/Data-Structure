@@ -94,11 +94,34 @@ int list_show(sqlink L){   //顺序表遍历
     }
     if(L->last == -1){
         printf("List is empty\n");
+        return 0;
     }
     for(int i = 0;i <= L->last;i++){
         printf("%d ",L->data[i]);
     }
     printf("\n");
+    return 0;
+
+}
+
+
+int delete(sqlink L,int pos){
+
+    if(L == NULL){
+        return -1;
+    }
+    if (L->last == -1){
+        printf("List is empty\n");
+        return -1;
+    }
+    if(pos < 0 || pos > L->last){
+        printf("Delete pos is invalid\n");
+        return -1;
+    }
+    for(int i = pos;i <= L->last;i++){
+        L->data[i] = L->data[i+1];
+    }
+    L->last--;
     return 0;
 
 }

@@ -35,7 +35,7 @@ int list_clear(sqlink L){
 
 };
 
-int list_delete(sqlink L){
+int list_free(sqlink L){
     if(L == NULL){
         return -1;
     }
@@ -59,8 +59,14 @@ int list_length(sqlink L){
 };
 
 int list_locate(sqlink L,data_t value){
+    
+    for(int i = 0;i <= L->last;i++){
+        if(L->data[i] == value){
+            return i;
+        }
+    }
+    return -1;
 
-    return 0;
 };
 
 int list_insert(sqlink L,data_t value,int pos){
@@ -105,7 +111,7 @@ int list_show(sqlink L){   //顺序表遍历
 }
 
 
-int delete(sqlink L,int pos){
+int list_delete(sqlink L,int pos){
 
     if(L == NULL){
         return -1;
@@ -118,10 +124,22 @@ int delete(sqlink L,int pos){
         printf("Delete pos is invalid\n");
         return -1;
     }
-    for(int i = pos;i <= L->last;i++){
-        L->data[i] = L->data[i+1];
+    for(int i = pos+1;i <= L->last;i++){
+        L->data[i-1] = L->data[i];
     }
     L->last--;
     return 0;
 
+}
+
+
+int list_merge(sqlink L1,sqlink L2){
+    for(int i = 0;i <= L2->last;i++){
+        if(list_locate(L1,L2->data[i]) == -1){
+            if(list_insert(L1,L2->data[i],L1->last+1) == -1){
+                return -1;
+            }
+        }
+    }
+    return 0;
 }

@@ -143,3 +143,23 @@ int list_merge(sqlink L1,sqlink L2){
     }
     return 0;
 }
+
+int list_purge(sqlink L){
+    if(L->last <= 0){
+        return 0;
+    }
+    int i = 1;
+    while(i <= L->last){
+        int j;
+        for(j = i - 1;j >= 0;j--){
+            if(L->data[j] == L->data[i]){
+                list_delete(L,i);
+                break;
+            }
+         }
+        if(j < 0){
+            i++;
+         }
+    }
+    return 0;
+}

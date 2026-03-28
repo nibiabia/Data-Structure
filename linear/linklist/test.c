@@ -19,5 +19,10 @@ int main(){
         list_tail_insert(H, value);
     }
     list_show(H);
+    
+    linklist p = list_get(H, 2);//1 3 5 7
+    if(p != NULL){
+        printf("value = %d\n",p->data);
+    }
     return 0;
 }

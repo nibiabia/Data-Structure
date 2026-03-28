@@ -34,7 +34,7 @@ int list_tail_insert(linklist H, data_t value){
     linklist q;
     q = H;
     while(q != NULL){
-        q = q->next;
+        q = q->next;//p不断指向下一个结点
     }
     //尾部插入
     q = p;
@@ -56,3 +56,51 @@ int list_show(linklist H){
     
 }
 
+linklist list_get(linklist H, int pos){
+
+    if(H == NULL){
+        printf("H is NULL.\n");
+        return NULL;
+    }
+    if(pos < -1){
+        printf("Pos is invalid\n");
+        return NULL;
+    }
+    linklist q;
+    q = H;
+    for(int i = -1;i < pos;i++){
+         q = q->next;
+         if(q == NULL){
+            printf("Pos is invalid\n");
+            break;
+         }
+    }
+    return q;
+
+}
+
+int list_insert(linklist H, data_t value, int pos){
+
+    if(H == NULL){
+        printf("H is NULL\n");
+        return -1;
+    }
+    linklist p;
+    p = list_get(H, pos - 1);
+    if(p == NULL){
+        printf("Pos is invalid\n");
+        return -1;
+    }
+    //在确认所有前置条件都合法、确实需要执行操作时，再去申请资源
+    linklist q;
+    if((q = (linklist)malloc(sizeof(listnode))) == NULL){
+        printf("Malloc failed.\n");
+        return -1;
+    }
+    q->data = value;
+    q->next = NULL;
+    q->next = p->next;//
+    p->next = q;//顺序不能反
+    return 0;
+
+}

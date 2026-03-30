@@ -56,14 +56,14 @@ int list_show(linklist H){
     
 }
 
-linklist list_get(linklist H, int pos){
+linklist list_get(linklist H, int pos){//通常底层的数据获取函数（如 get）不需要负责打印错误信息（保持静默），只需返回 NULL。
+// 把打印错误信息的责任交给调用它的上层函数（如 delete、insert 等）或者主函数，这样可以避免错误信息重复打印。
 
     if(H == NULL){
         printf("H is NULL.\n");
         return NULL;
     }
     if(pos < -1){
-        printf("Pos is invalid\n");
         return NULL;
     }
     linklist q;
@@ -71,7 +71,6 @@ linklist list_get(linklist H, int pos){
     for(int i = -1;i < pos;i++){
          q = q->next;
          if(q == NULL){
-            printf("Pos is invalid\n");
             break;
          }
     }
@@ -101,6 +100,29 @@ int list_insert(linklist H, data_t value, int pos){
     q->next = NULL;
     q->next = p->next;//
     p->next = q;//顺序不能反
+    return 0;
+
+}
+
+int list_delete(linklist H, int pos){
+
+    if(H == NULL){
+        printf("H is NULL\n");
+        return -1;
+    }
+    linklist p = list_get(H, pos - 1);
+    if(p == NULL){
+        printf("Pos is invalid\n");
+        return -1;
+    }
+    if(p->next == NULL){
+        printf("Pos is invalid\n");
+        return -1;
+    }
+    linklist q = p->next;
+    p->next = p->next->next;
+    free(q);
+    q = NULL;
     return 0;
 
 }

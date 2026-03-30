@@ -2,12 +2,22 @@
 #include<stdlib.h>
 #include"linklist.h"
 
+void test_delete();
+void test_get();
+void test_insert();
+
 int main(){
+
+    
+    return 0;
+}
+
+void test_get(){
 
     linklist H;
     H = list_create();
     if(H == NULL){
-        return -1;
+        return;
     }
     data_t value;
     while(1){
@@ -24,5 +34,52 @@ int main(){
     if(p != NULL){
         printf("value = %d\n",p->data);
     }
-    return 0;
+    p = list_get(H,4);
+
+}
+
+void test_insert(){
+
+    linklist H;
+    H = list_create();
+    if(H == NULL){
+        return;
+    }
+    data_t value;
+    while(1){
+        printf("Input:");
+        scanf("%d", &value);
+        if(value == -1){
+            break;
+        }
+        list_tail_insert(H, value);
+    }
+    list_show(H);
+    list_insert(H, 100, 2);
+    list_insert(H, 20, 5);
+    list_show(H);
+
+}
+
+void test_delete(){
+
+    linklist H;
+    H = list_create();
+    if(H == NULL){
+        return;
+    }
+    data_t value;
+    while(1){
+        printf("Input:");
+        scanf("%d", &value);
+        if(value == -1){
+            break;
+        }
+        list_tail_insert(H, value);
+    }
+    list_show(H);
+    list_delete(H, 0);
+    list_delete(H, 5);
+    list_show(H);
+
 }

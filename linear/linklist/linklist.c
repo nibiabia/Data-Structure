@@ -126,3 +126,20 @@ int list_delete(linklist H, int pos){
     return 0;
 
 }
+
+int list_free(linklist H){
+
+    if(H ==NULL){
+        printf("H is NULL\n");
+        return -1;
+    }
+    linklist q = H;
+    linklist p;
+    while(q != NULL){
+        p = q->next;
+        free(q);
+        q = p;
+    }
+    return 0;
+
+}//调用完list_free后，还要在后面手动将头指针置为NULL 

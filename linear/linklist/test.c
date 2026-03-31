@@ -35,6 +35,8 @@ void test_get(){
         printf("value = %d\n",p->data);
     }
     p = list_get(H,4);
+    list_free(H);
+    H = NULL;
 
 }
 
@@ -58,6 +60,8 @@ void test_insert(){
     list_insert(H, 100, 2);
     list_insert(H, 20, 5);
     list_show(H);
+    list_free(H);
+    H = NULL;
 
 }
 
@@ -81,5 +85,7 @@ void test_delete(){
     list_delete(H, 0);
     list_delete(H, 5);
     list_show(H);
+    list_free(H);
+    H = NULL;
 
 }

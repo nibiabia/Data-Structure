@@ -89,3 +89,27 @@ void test_delete(){
     H = NULL;
 
 }
+
+void test_reverse(){
+
+    linklist H;
+    H = list_create();
+    if(H == NULL){
+        return;
+    }
+    data_t value;
+    while(1){
+        printf("Input:");
+        scanf("%d", &value);
+        if(value == -1){
+            break;
+        }
+        list_tail_insert(H, value);
+    }
+    list_show(H);
+    list_reverse(H);
+    list_show(H);
+    list_free(H);
+    H = NULL;
+    
+}

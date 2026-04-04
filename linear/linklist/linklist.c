@@ -143,3 +143,27 @@ int list_free(linklist H){
     return 0;
 
 }//调用完list_free后，还要在后面手动将头指针置为NULL 
+
+int list_reverse(linklist H){
+
+    if(H == NULL){
+        printf("H is NULL\n");
+        return -1;
+    }
+    if(H->next == NULL || H->next->next == NULL){//空链表或者只有一个结点
+        return 0;
+    }
+
+    linklist p = H->next->next;
+    H->next->next = NULL;//把链表分成两部分
+
+    linklist q;
+    while(p != NULL){
+        q = p;
+        p = p->next;
+        q->next = H->next;
+        H->next = q;
+    }
+    return 0;
+
+}

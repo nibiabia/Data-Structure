@@ -5,11 +5,14 @@
 void test_delete();
 void test_get();
 void test_insert();
+void test_adjmax();
+void test_reverse();
 
 int main(){
 
-    
+    test_get();
     return 0;
+
 }
 
 void test_get(){
@@ -112,4 +115,29 @@ void test_reverse(){
     list_free(H);
     H = NULL;
     
+}
+
+void test_adjmax(){
+
+    linklist H;
+    H = list_create();
+    data_t value;
+    while(1){
+        printf("Input:");
+        scanf("%d",&value);
+        if(value == -1){
+            break;
+        }
+        list_tail_insert(H,value);
+    }
+    list_show(H);
+    data_t max;
+    linklist r = list_adjmax(H, &max);
+    if(r != NULL && r != H){
+         printf("%d\n",r->data);
+         printf("%d\n",max);
+    }
+    list_free(H);
+    H = NULL;
+
 }

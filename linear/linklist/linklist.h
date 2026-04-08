@@ -12,3 +12,4 @@ int list_insert(linklist H, data_t value, int pos);
 int list_delete(linklist H, int pos);
 int list_free(linklist H);
 int list_reverse(linklist H);
+linklist list_adjmax(linklist H, data_t *max);

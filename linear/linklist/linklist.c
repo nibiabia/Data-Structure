@@ -33,11 +33,11 @@ int list_tail_insert(linklist H, data_t value){
     //寻找尾结点
     linklist q;
     q = H;
-    while(q != NULL){
+    while(q->next != NULL){
         q = q->next;//p不断指向下一个结点
     }
     //尾部插入
-    q = p;
+    q->next = p;
     return 0;
 
 }
@@ -48,8 +48,10 @@ int list_show(linklist H){
         printf("H is NULL.\n");
         return -1;
     }
+    linklist q = H;
     while(q->next != NULL){
         printf("%d ",q->next->data);
+        q = q->next;
     }
     printf("\n");
     return 0;
@@ -165,5 +167,32 @@ int list_reverse(linklist H){
         H->next = q;
     }
     return 0;
+
+}
+
+linklist list_adjmax(linklist H, data_t *max){
+
+    if(H == NULL){
+        printf("H is NULL\n");
+        return NULL;
+    }
+    if(H->next == NULL || H->next->next == NULL){
+        *max = 0;
+        return H;
+    }
+    linklist p = H->next;
+    linklist q = H->next->next;
+    linklist r = p;
+    *max = p->data + q->data;
+    while(q->next != NULL){
+        p = p->next;
+        q = q->next;
+        data_t sum = q->data + p->data;
+        if(sum > *max){
+            *max = sum;
+            r = p;
+        }
+    }
+    return r;
 
 }

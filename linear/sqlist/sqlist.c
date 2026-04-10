@@ -133,7 +133,7 @@ int list_delete(sqlink L,int pos){
 }
 
 
-int list_merge(sqlink L1,sqlink L2){
+int list_merge(sqlink L1, sqlink L2){
     for(int i = 0;i <= L2->last;i++){
         if(list_locate(L1,L2->data[i]) == -1){
             if(list_insert(L1,L2->data[i],L1->last+1) == -1){

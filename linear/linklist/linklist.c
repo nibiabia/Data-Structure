@@ -196,3 +196,36 @@ linklist list_adjmax(linklist H, data_t *max){
     return r;
 
 }
+
+int list_merge(linklist H1, linklist H2){//尾插法（Tail Pointer）。
+//思路概括为：“把 H1 和 H2 的节点全拆散，谁小就捡起谁，排成一条新队伍
+
+    if(H1 == NULL || H2 == NULL){
+        printf("H1 || H2 is NULL\n");
+        return -1;
+    }
+    linklist p, q, r;
+    p = H1->next;
+    q = H2->next;
+    r = H1;
+    H1->next = NULL;
+    H2->next = NULL;
+    while(p && q){
+        if(p->data <= q->data){
+            r->next = p;
+            p = p->next;
+        }else{
+            r->next = q;
+            q = q->next;
+        }
+        r = r->next;
+        r->next = NULL;
+    }
+    if(p == NULL){
+        r->next = q;
+    }else{
+        r->next = p;
+    }
+    return 0;
+
+}

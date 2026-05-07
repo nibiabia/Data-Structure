@@ -23,3 +23,87 @@ sqstack *stack_create(unsigned int len){
     return s;
 
 }
+/*
+@return 1-empty 0-not empty -1-error
+*/
+int stack_empty(sqstack *s){
+
+    if(s == NULL){
+        printf("s is NULL\n");
+        return -1;
+    }
+    return (s->top == -1 ? 1 : 0);
+
+}
+
+/*
+@return 1-full 0-not full -1-error
+*/
+int stack_full(sqstack *s){
+
+    if(s == NULL){
+        printf("s is NULL\n");
+        return -1;
+    }
+    return (s->top == s->maxlen -1 ? 1 : 0);
+
+}
+
+int stack_push(sqstack *s, data_t value){
+
+    if(s == NULL){
+        printf("s is NULL\n");
+        return -1;
+    }
+    if(s->top == s->maxlen - 1){
+        printf("sqstack is full\n");
+        return -1;
+    }
+    s->top++;
+    s->data[s->top] = value;
+    return 0;
+
+}
+
+data_t stack_pop(sqstack *s){
+
+    if(s == NULL){
+        printf("s is NULL\n");
+        return -1;
+    }
+    if(s->top == -1){
+        printf("sqstack is empty\n");
+        return -1;
+    }
+    s->top--;
+    return s->data[s->top + 1];
+
+}
+/*
+@return 0-success -1-error
+*/
+int stack_clear(sqstack *s){
+
+    if(s == NULL){
+        printf("s is NULL\n");
+        return -1;
+    }
+    s->top = -1;
+    return 0;
+
+}
+
+/*
+@return 0-success -1-error
+*/
+int stack_free(sqstack *s){
+
+    if(s == NULL){
+        printf("s is NULL\n");
+        return -1;
+    }
+    free(s->data);
+    free(s);
+    return 0;
+    
+}
